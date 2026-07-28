@@ -1,0 +1,31 @@
+name: Gerar APK Android
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. Baixar o código do projeto
+        uses: actions/checkout@v3
+
+      - name: 2. Configurar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: 3. Instalar dependências
+        working-directory: ./frontend
+        run: npm install
+
+      - name: 4. Instalar EAS CLI da Expo
+        run: npm install -g eas-cli
+
+      - name: 5. Fazer Build do APK na Nuvem do EAS (Perfil de Preview)
+        working-directory: ./frontend
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+        run: |
+          eas build --platform android --profile preview --non-interactive
