@@ -1,0 +1,38 @@
+{
+  "summary": "First test iteration for HomeFlow. Backend: 25/25 pytest cases passed against the public URL, covering auth (register, login, /me, invalid/missing token 401), founder detection (is_founder & is_premium both True for susanrodriguesp@gmail.com), all CRUD (wallets, transactions with balance mutation & rollback on delete, goals, tasks, shopping, events, cards), dashboard/summary aggregates, /founders list contains both seeded emails, /ai/chat returns real GPT-4o-mini reply via emergentintegrations. Frontend: verified Welcome screen with both CTAs, register flow -> /(tabs)/home (balance R$ 0,00), tab navigation Início/Finanças/Tarefas/Mercado works, 3 chip segments render on single row (does NOT wrap), wallet modal creates wallet, transaction modal decrements balance correctly (500 - 30 = R$ 470,00), Profile page shows 'Premium Founder' badge for founder email with theme toggle (Claro/Escuro/Sistema) and Sair da Conta button, AI-chat screen renders with welcome message and suggestion chips. No critical bugs.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [],
+    "react_native_issues": [
+      {"component": "RN Web deprecation warnings", "issue": "Console warnings: 'props.pointerEvents is deprecated. Use style.pointerEvents' and '\"shadow*\" style props are deprecated. Use \"boxShadow\"'. Non-blocking but should migrate. Likely emitted by expo-blur / LinearGradient / third-party components used in home.tsx and financas.tsx."}
+    ]
+  },
+  "test_report_links": [
+    "/app/backend/tests/test_homeflow_api.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "(Optional) Silence RN web deprecation warnings by migrating style.shadow* -> boxShadow and props.pointerEvents -> style.pointerEvents where used in custom components. These are warnings only.",
+    "AI-chat testIDs in playbook doc: input is 'chat-input' and send is 'chat-send' (documented here so next iteration uses correct selectors)."
+  ],
+  "critical_code_review_comments": [
+    "server.py: create_wallet / create_tx etc. insert doc.copy() into Mongo but Motor mutates the doc with _id; the code then does doc.pop('_id', None) on the original which is unnecessary because .copy() already isolated it. Harmless.",
+    "server.py delete_transaction: sign for rollback correctly inverts type but there is no HTTP error if tid does not exist (silently returns ok). Minor.",
+    "financas.tsx TxModal: does not filter by non-empty wallets and could submit with invalid walletId if wallets is empty (add-tx-btn already guards by opening wallet modal). OK.",
+    "home.tsx & financas.tsx: files are still under 700 lines and DRY is acceptable."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_homeflow_api.py (new)"
+  ],
+  "success_rate": {"backend": "100% (25/25)", "frontend": "100% for tested flows (welcome, register, login, home, financas chips, wallet create, transaction with balance update, profile founder badge, tab navigation, ai chat screen render)"},
+  "seed_data_creation": "Created regular test user teste@homeflow.app/senha123 and founder susanrodriguesp@gmail.com/founder123 via /api/auth/register (idempotent via login fallback). Some TEST_ prefixed wallets/transactions may remain on founder account from E2E flow (TEST_E2E wallet + TEST_expense tx).",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Backend URL: https://smart-home-app-12.preview.emergentagent.com. Test credentials in /app/memory/test_credentials.md. Backend pytest suite at /app/backend/tests/test_homeflow_api.py covers all endpoints. AI chat frontend testIDs: chat-input, chat-send, suggestion-<text>, chat-close, ai-chat-screen. Founder badge testID: founder-badge. All other testIDs discoverable in components.",
+  "rca_of_issue": "N/A - no bugs to RCA"
+}

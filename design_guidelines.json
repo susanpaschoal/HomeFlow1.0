@@ -1,0 +1,188 @@
+{
+  "app_name": "HomeFlow",
+  "personality": "1 iOS-Native Clean (with 6 Glass / Luxe touches)",
+  "personality_one_liner": "A premium, Notion-meets-Apple home and family management experience that feels organized, deeply reassuring, and elegantly calm.",
+  "color": {
+    "light": {
+      "surface": "#F9FAFB",
+      "onSurface": "#111827",
+      "surfaceSecondary": "#FFFFFF",
+      "onSurfaceSecondary": "#374151",
+      "surfaceTertiary": "#F3F4F6",
+      "onSurfaceTertiary": "#6B7280",
+      "surfaceInverse": "#111827",
+      "onSurfaceInverse": "#FFFFFF",
+      "brand": "#2D5A46",
+      "brandPrimary": "#2D5A46",
+      "onBrandPrimary": "#FFFFFF",
+      "brandSecondary": "#D3E4DB",
+      "onBrandSecondary": "#1E3B2E",
+      "brandTertiary": "#EAF2EE",
+      "onBrandTertiary": "#2D5A46",
+      "success": "#1F7A4D",
+      "onSuccess": "#FFFFFF",
+      "warning": "#B0652D",
+      "onWarning": "#FFFFFF",
+      "error": "#A33A3A",
+      "onError": "#FFFFFF",
+      "info": "#4A5568",
+      "onInfo": "#FFFFFF",
+      "border": "#E5E7EB",
+      "borderStrong": "#D1D5DB",
+      "divider": "#F3F4F6"
+    },
+    "dark": {
+      "surface": "#0A0A0A",
+      "onSurface": "#F3F4F6",
+      "surfaceSecondary": "#171717",
+      "onSurfaceSecondary": "#D1D5DB",
+      "surfaceTertiary": "#262626",
+      "onSurfaceTertiary": "#9CA3AF",
+      "surfaceInverse": "#F9FAFB",
+      "onSurfaceInverse": "#111827",
+      "brand": "#5CB88E",
+      "brandPrimary": "#5CB88E",
+      "onBrandPrimary": "#081A12",
+      "brandSecondary": "#1E3B2E",
+      "onBrandSecondary": "#A3D9BE",
+      "brandTertiary": "#102A1F",
+      "onBrandTertiary": "#5CB88E",
+      "success": "#4CC486",
+      "onSuccess": "#081A12",
+      "warning": "#E69C60",
+      "onWarning": "#1C0D05",
+      "error": "#EF7A7A",
+      "onError": "#1F0A0A",
+      "info": "#A0AEC0",
+      "onInfo": "#0F1217",
+      "border": "#262626",
+      "borderStrong": "#404040",
+      "divider": "#1A1A1A"
+    }
+  },
+  "typography": {
+    "displayFontFamily": "Plus Jakarta Sans",
+    "textFontFamily": "Plus Jakarta Sans",
+    "scale": {
+      "sm": 12,
+      "base": 14,
+      "lg": 16,
+      "xl": 20,
+      "2xl": 24
+    }
+  },
+  "spacing": {
+    "rule": "Maintain Apple-like generous vertical padding. Cards should never flush to screen edges. Use intentional whitespace to separate functional sections.",
+    "xs": 4,
+    "sm": 8,
+    "md": 12,
+    "lg": 16,
+    "xl": 24,
+    "2xl": 32,
+    "3xl": 48
+  },
+  "radius_tokens": {
+    "sm": 6,
+    "md": 12,
+    "lg": 20,
+    "pill": 999
+  },
+  "shadow_tier": "1",
+  "navigation": "bottom_tabs",
+  "icon_set": "Ionicons",
+  "glassmorphism": {
+    "enabled": true,
+    "do's": [
+      "Apply to sticky headers, bottom tab bar, and bottom-sheet drag handles.",
+      "Use over the hero financial card background imagery for a premium signature Apple look.",
+      "Pair blur with a translucent tinted base (≥70% opacity in light, ≥75% in dark) to guarantee foreground readability."
+    ],
+    "dont's": [
+      "Do not apply glass to dense form inputs, simple body text sections, or every individual list row."
+    ]
+  },
+  "platform_libraries": {
+    "glass": {
+      "ios": "expo-glass-effect",
+      "android": "expo-blur",
+      "low_end_android_fallback": "solid surfaceSecondary"
+    },
+    "image": "expo-image",
+    "blur": "expo-blur",
+    "bottom_sheet": "@gorhom/bottom-sheet",
+    "animation": "react-native-reanimated",
+    "gesture": "react-native-gesture-handler"
+  },
+  "screens": [
+    {
+      "name": "Home",
+      "purpose": "A unified dashboard summarizing household health (finances, bills, tasks, shopping, AI motivational snippet).",
+      "states": {
+        "loading": "Centered minimalist spinner in primary brand color.",
+        "empty": "N/A - This screen populates default summary components.",
+        "error": "Polite error text instructing to reload the dashboard, with a sleek retry button."
+      },
+      "layout": "Top Header: Greeting, User Avatar (serving as Profile entry), and a subtle 'Acesso Founder' badge. Hero Card (Financial Summary): Image backdrop layered with a 3-stop vertical gradient scrim and a frosted glass panel holding total balance and AI insight. Below Hero: 2-column grid of smart cards (Próximas Contas, Lista de Mercado, Tarefas de Hoje, Calendário) using clean Notion-inspired outlines and high-contrast typography."
+    },
+    {
+      "name": "Finanças",
+      "purpose": "Deep dive into financial control, shared wallets, bills, income, goals, and AI financial assistant.",
+      "states": {
+        "loading": "Skeleton loaders matching the rounded card shapes.",
+        "empty": "Illustration of couple managing finances over coffee, with a call-to-action to 'Adicionar Transação'.",
+        "error": "Error message with a retry button to fetch wallet data."
+      },
+      "layout": "Top Header: Segmented control (Visão Geral / Metas / Gráficos). Content: Horizontally scrolling wallet cards. Vertical list for recent transactions and due bills. Floating Action Button (FAB) for the 'Assistente IA Financeiro' using a glass blur overlay on brandTertiary tint."
+    },
+    {
+      "name": "Tarefas",
+      "purpose": "Kanban-style task management with delegation, checklists, and deadlines.",
+      "states": {
+        "loading": "Skeleton rows indicating tasks loading.",
+        "empty": "Clean empty state illustration. Text: 'Nenhuma tarefa pendente. Aproveite o tempo livre!'",
+        "error": "Standard subtle error state."
+      },
+      "layout": "Notion-inspired minimalist layout. Horizontal categories (Todas, Casa, Compras, Filhos) acting as Kanban lanes or tabs. Stacked rows with native-feeling checkboxes, drag-handles, and subtle dividers. An inline 'Adicionar Tarefa' field at the bottom."
+    },
+    {
+      "name": "Mercado",
+      "purpose": "Shared shopping list organized by category with priority flags.",
+      "states": {
+        "loading": "Skeleton checkboxes.",
+        "empty": "Clean empty state. Text: 'Sua lista de mercado está vazia.'",
+        "error": "Standard subtle error state."
+      },
+      "layout": "Block-based list similar to Apple Reminders or Notion. Items grouped by section headers (e.g., 'Hortifruti', 'Limpeza'). Each row features a checkbox, item name, quantity, and an optional subtle photo thumbnail. Floating '+' button."
+    }
+  ],
+  "images": {
+    "home_hero": {
+      "url": "https://images.unsplash.com/photo-1628744876497-eb30460be9f6",
+      "dark": "https://images.pexels.com/photos/14875811/pexels-photo-14875811.jpeg",
+      "alt": "Premium home interior indicating smart home and organized household"
+    },
+    "finances_empty_state": {
+      "url": "https://images.unsplash.com/photo-1542338332-76971ae8c292",
+      "dark": "https://images.unsplash.com/photo-1635317735762-6a5ae18ee1c9",
+      "alt": "Couple managing finances and coffee mugs on table"
+    }
+  },
+  "haptics": {
+    "tab_press": "light",
+    "task_checkbox_toggle": "medium",
+    "add_transaction_commit": "success",
+    "ai_assistant_open": "light",
+    "pull_to_refresh": "light"
+  },
+  "instructions_to_main_agent": [
+    "All UI copy must be in Portuguese-BR.",
+    "STRICT BOTTOM TABS ANTI-PATTERN RULE: Do not use 6 bottom tabs as requested. Use exactly 4 bottom tabs: 'Início', 'Finanças', 'Tarefas', 'Mercado'.",
+    "Place the 'Perfil' (Profile) access as an Avatar icon in the top header of the Home screen, alongside the 'Acesso Founder' badge.",
+    "Place the 'Calendário' (Calendar) either as an icon in the header or as a prominent block within the Home dashboard.",
+    "Color Palette Rule: No blue, purple, or indigo used anywhere. Default to the rich Sage Green palette provided.",
+    "For the Home Hero card, STRICTLY IMPLEMENT the Gradient Scrim Pattern: Layer 0 = image, Layer 1 = vertical 3-stop linear gradient (transparent to >=80% surfaceInverse), Layer 2 = Glass effect + content (text onSurfaceInverse).",
+    "Ensure both Light and Dark modes are handled flawlessly. Background textures must shift accordingly.",
+    "Use a minimalist, Apple/Notion style for lists (Tarefas, Mercado) with prominent whitespace, subtle dividers, and high-contrast typography.",
+    "AI Financial Assistant should be accessible via a glassmorphism FAB on the Finanças screen."
+  ]
+}

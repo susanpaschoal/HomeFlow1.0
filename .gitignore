@@ -1,0 +1,8 @@
+node_modules/
+.expo/
+.emergent/
+dist/
+build/
+android/app/build/
+ios/Pods/
+.env
